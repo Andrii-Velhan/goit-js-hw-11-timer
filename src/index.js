@@ -30,11 +30,12 @@ class Timer {
             return;
         }
         //----------------        
-        const startTime = Date.now();
+        
         this.isActive = true;
 
         this.intervalid = setInterval(() => {
-            const currentTime = Date.now();
+            const startTime = Date.now();
+            const currentTime = timer.targetDate;
             const deltaTime = currentTime - startTime;
             const time = this.getTimeComponents(deltaTime);
             console.log(time);
@@ -67,7 +68,7 @@ class Timer {
 
 const timer = new Timer({
     selector: '#timer-1',
-    targetDate: new Date('Jul 12, 2021'),
+    targetDate: new Date('Jan 1, 2021'),
     onTick: updateClockface
 });
 
