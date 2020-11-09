@@ -5,19 +5,14 @@ const refs = {
     hours: document.querySelector('span[data-value="hours"]'),
     mins: document.querySelector('span[data-value="mins"]'),
     secs: document.querySelector('span[data-value="secs"]'),
-    currentDate: document.querySelector('.js-target-date'),
 }
 
 class Timer {
     constructor({ selector, targetDate, onTick}) {
-        // this.intervalid = null;
-        // this.isActive = false;
         this.onTick = onTick;
         this.selector = selector;
         this.targetDate = targetDate;
         this.init();
-        // this.render();
-        // this.run();
     }
 
     init() {
@@ -29,29 +24,27 @@ class Timer {
         if (this.isActive) {
             return;
         }
-        //----------------        
         
         this.isActive = true;
 
         this.intervalid = setInterval(() => {
             const startTime = Date.now();
-            const currentTime = timer.targetDate;
-            const deltaTime = currentTime - startTime;
+            const targetTime = timer.targetDate;
+            const deltaTime = targetTime - startTime;
             const time = this.getTimeComponents(deltaTime);
             console.log(time);
 
             this.onTick(time);
-            //updateClockface(time);
         }, 1000);
     }
-    //-----для кнопки STOP------
+
     stop() {
         clearInterval(this.intervalId)
         this.isActive = falce;
         const time = this.getTimeComponents(0);
         this.onTick(time);
-//-----------------------------
     }
+
     getTimeComponents(time) {
         const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
         const hours = this.pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
@@ -68,7 +61,7 @@ class Timer {
 
 const timer = new Timer({
     selector: '#timer-1',
-    targetDate: new Date('Jan 1, 2021'),
+    targetDate: new Date('Jun 1, 2021'),
     onTick: updateClockface
 });
 
@@ -81,22 +74,4 @@ function updateClockface({ days, hours, mins, secs }) {
     refs.secs.textContent = `${secs}`;
 };
 
-
-// class CountdownTimer {
-//     constructor({ selector, targetDate })
-//     {
-//         this.selector = selector;
-//         this.date = targetDate;
-//         this.render();
-//         this.run();
-//     };
-
-// new CountdownTimer({
-//   selector: '#timer-1',
-//   targetDate: new Date('Jul 12, 2021'),
-// });
-
-
-
-//console.log(currentTime - startTime);
 
